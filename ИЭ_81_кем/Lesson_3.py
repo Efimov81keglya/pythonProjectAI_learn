@@ -75,7 +75,8 @@ import random
 
 def conveyor():
     while True:
-        yield random.randint(95,105)
+        yield random.randint(95, 105)
+
 
 factory = conveyor()
 
@@ -83,6 +84,17 @@ defective_count = 0
 
 for detail_size in factory:
     print(f"сканирование детали - {detail_size} мм")
+    
+    if detail_size < 98 or detail_size > 102:
+        defective_count += 1
+        print(f"  ❌ БРАК! (допуск: 98-102 мм)")
+        print(f"  Счетчик брака: {defective_count}/3\n")
+        
+        if defective_count >= 3:
+            print("⚠️ Внимание! Обнаружено 3 бракованные детали. Конвейер остановлен")
+            break
+    else:
+        print(f"  ✅ ОК (в допуске)\n")
     # дописать код
     # читать - https://habr.com/ru/articles/132554/
 
